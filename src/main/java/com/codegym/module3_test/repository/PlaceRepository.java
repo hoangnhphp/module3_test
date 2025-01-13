@@ -22,7 +22,7 @@ public class PlaceRepository {
         if (search.containsKey("type") && !Objects.equals(search.get("type"), "")) {
             query = query + " where type = " + search.get("type");
         }
-        if (search.containsKey("num_of_floor") && !Objects.equals(search.get("num_of_floors"), "")) {
+        if (search.containsKey("num_of_floors") && !Objects.equals(search.get("num_of_floors"), "")) {
             query =  query + " where num_of_floors = " + search.get("num_of_floors");
         }
         if (search.containsKey("start_date") && !Objects.equals(search.get("start_date"), "")) {
