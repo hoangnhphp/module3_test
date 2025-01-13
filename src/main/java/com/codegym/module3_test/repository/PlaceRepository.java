@@ -17,13 +17,25 @@ public class PlaceRepository {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
         String query = selectAll;
         if (search.containsKey("status") && !Objects.equals(search.get("status"), "")) {
-            query = query + " where status = " + search.get("status");
+            if (query.contains("where")) {
+                query = query + " and status = " + search.get("status");
+            } else {
+                query = query + " where status = " + search.get("status");
+            }
         }
         if (search.containsKey("type") && !Objects.equals(search.get("type"), "")) {
-            query = query + " where type = " + search.get("type");
+            if (query.contains("where")) {
+                query = query + " and type = " + search.get("type");
+            } else {
+                query = query + " where type = " + search.get("type");
+            }
         }
         if (search.containsKey("num_of_floors") && !Objects.equals(search.get("num_of_floors"), "")) {
-            query =  query + " where num_of_floors = " + search.get("num_of_floors");
+            if (query.contains("where")) {
+                query = query + " and num_of_floors = " + search.get("num_of_floors");
+            } else {
+                query = query + " where num_of_floors = " + search.get("num_of_floors");
+            }
         }
         if (search.containsKey("start_date") && !Objects.equals(search.get("start_date"), "")) {
             String startDate = "";
@@ -33,7 +45,11 @@ public class PlaceRepository {
             } catch (ParseException e) {
                 System.out.println("Lỗi phân tích ngày: " + e.getMessage());
             }
-            query = query + " where start_date >= " + startDate;
+            if (query.contains("where")) {
+                query = query + " and start_date >= " + startDate;
+            } else {
+                query = query + " where start_date >= " + startDate;
+            }
         }
         if (search.containsKey("end_date") && !Objects.equals(search.get("end_date"), "")) {
             String endDate = "";
@@ -43,9 +59,13 @@ public class PlaceRepository {
             } catch (ParseException e) {
                 System.out.println("Lỗi phân tích ngày: " + e.getMessage());
             }
-            query = query + " where end_date <= " + endDate;
+            if (query.contains("where")) {
+                query = query + " and end_date <= " + endDate;
+            } else {
+                query = query + " where end_date <= " + endDate;
+            }
         }
-        query = query + " order by  acreage";
+        query = query + " order by acreage";
         try (
             Connection connection = BaseRepository.getConnection();
             PreparedStatement statement = connection.prepareStatement(query)
