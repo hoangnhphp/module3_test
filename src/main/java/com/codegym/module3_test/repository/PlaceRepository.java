@@ -47,7 +47,7 @@ public class PlaceRepository {
             }
             query += " where end_date <= " + endDate;
         }
-
+        query += " order by  acreage desc";
         try (
             Connection connection = BaseRepository.getConnection();
             PreparedStatement statement = connection.prepareStatement(query)
