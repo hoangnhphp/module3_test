@@ -103,15 +103,8 @@ public class PlaceController extends HttpServlet {
             errors.put("price", "Giá thuê phải lớn hơn 1000000");
         }
         Place place = new Place(code, status, acreage, num_of_floors,type, price, start_date, end_date, description);
-        if (errors.size() > 0) {
-            req.setAttribute("errors", errors);
-            req.setAttribute("place", place);
-            req.getRequestDispatcher("/view/form.jsp").forward(req, resp);
-        } else {
+        placeRepository.save(place);
 
-            placeRepository.save(place);
-
-            resp.sendRedirect(req.getContextPath() + "/places");
-        }
+        resp.sendRedirect(req.getContextPath() + "/places");
     }
 }
